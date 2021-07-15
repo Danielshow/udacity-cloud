@@ -1,5 +1,4 @@
 import express, { Router, Request, Response } from 'express';
-import bodyParser from 'body-parser';
 
 import { Car, cars as cars_list } from './cars';
 
@@ -13,7 +12,7 @@ import { Car, cars as cars_list } from './cars';
   
   //use middleware so post bodies 
   //are accessable as req.body.{{variable}}
-  app.use(bodyParser.json()); 
+  app.use(express.json()); 
 
   // Root URI call
   app.get( "/", ( req: Request, res: Response ) => {
@@ -70,7 +69,10 @@ import { Car, cars as cars_list } from './cars';
 
   // @TODO Add an endpoint to GET a list of cars
   // it should be filterable by make with a query paramater
-
+  app.get('/cars', async (req: Request, res: Response) => {
+    const { filter } = req.query;
+    return []
+  })
   // @TODO Add an endpoint to get a specific car
   // it should require id
   // it should fail gracefully if no matching car is found
